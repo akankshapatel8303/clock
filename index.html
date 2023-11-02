@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <!-- <link rel="stylesheet" href="item.css"> -->
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    color: white;
+}
+body{
+display: flex;
+justify-content: center;
+align-items: center;
+min-height: 100vh;
+background-color: black;
+}
+.container{
+    position: relative;
+}
+.clock{
+    width: 350px;
+    height: 350px;
+    background-color: rgb(49, 44, 44);
+    border-radius: 50%;
+    border: 3px solid rgb(87, 82, 82);
+    box-shadow: 0px 0px 40px rgb(36, 33, 33);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.clock span{
+    position: absolute;
+    transform: rotate(calc(30deg * var(--i)));
+    inset: 12px;
+    text-align: center;
+}
+.clock span b{
+    transform: rotate(calc(-30deg * var(--i)));
+    display: inline-block;
+    font-size: 1.2rem;
+}
+.clock::before{
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: white;
+    z-index: 2;
+}
+.hand{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+ #hour i{
+    position: absolute;
+    background-color: var(--clr1);
+    width: 5px;
+    height: 100px;
+    border-radius: 8px;
+}
+ #min i{
+    position: absolute;
+    background-color: var(--clr2);
+    width: 4px;
+    height: 105px;
+    border-radius: 8px;
+}
+ #sec i{
+    position: absolute;
+    background-color: var(--clr3);
+    width: 3px;
+    height: 110px;
+    border-radius: 8px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="clock">
+            <div style="--clr1:#f80828;"id = "hour" class="hand"><i></i></div>
+            <div style="--clr2:#029999;"id = "min" class="hand"><i></i></div>
+            <div style="--clr3:#f5eff0;"id = "sec" class="hand"><i></i></div> 
+
+           <span style="--i:1"><b>1</b></span>
+           <span style="--i:2"><b>2</b></span>
+           <span style="--i:3"><b>3</b></span>
+           <span style="--i:4"><b>4</b></span>
+           <span style="--i:5"><b>5</b></span>
+           <span style="--i:6"><b>6</b></span>
+           <span style="--i:7"><b>7</b></span>
+           <span style="--i:8"><b>8</b></span>
+           <span style="--i:9"><b>9</b></span>
+           <span style="--i:10"><b>10</b></span>
+           <span style="--i:11"><b>11</b></span>
+           <span style="--i:12"><b>12</b></span>
+        </div>
+    </div>
+</body>
+<script>
+    let hr = document.getElementById('hour')
+let min = document.getElementById('min')
+let sec = document.getElementById('sec')
+
+function displayTime(){
+    let date = new Date();
+    let hh = date.getHours();
+    let mm = date.getMinutes();
+    let ss = date.getSeconds();
+
+    let hRotation = 30*hh + mm/2;
+    let mRotation = 6*mm;
+    let sRotation = 6*ss;
+
+    hr.style.transform = `rotate(${hRotation}deg)`;
+    min.style.transform = `rotate(${mRotation}deg)`;
+    sec.style.transform = `rotate(${sRotation}deg)`;
+}
+setInterval(displayTime, 1000);
+</script>
+</html>
